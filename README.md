@@ -1,59 +1,93 @@
-# HealthMonitorApp
+Health Challenge Tracker
+A single-page application (SPA) built using Angular 14+ to track users' workout activities, including workout types and minutes. It allows users to:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+Add workout details (user name, workout type, and workout minutes)
+View and manage workouts with search, filter, and pagination functionalities
+Display workout progress using charts
+Store data locally using localStorage
+This project was built as part of a frontend development challenge and demonstrates practical skills in Angular, Tailwind CSS, and unit testing.
 
-## Development server
+Features
+User Input: Add user name, workout type, and workout minutes.
+Search: Search for workouts by user name.
+Filter: Filter workouts by workout type (Running, Cycling, Swimming, etc.).
+Pagination: Pagination for displaying user workouts when there are more than 5 users.
+Charts : Visualize the workout progress with charts.
+Unit Testing: 100% test coverage for the component and service.
+Responsive Design: Built with Tailwind CSS for a responsive, modern UI.
+Getting Started
+Prerequisites
+Before you begin, ensure that you have the following installed:
 
-To start a local development server, run:
+Node.js (version 14 or higher)
+npm (Node Package Manager)
+To check if you have Node.js and npm installed, run the following command in your terminal:
+node -v
+npm -v
+If you don't have them installed, you can download and install Node.js 
 
-```bash
+Cloning the Repository
+Clone the GitHub repository to your local machine:
+
+bash
+Copy
+Edit
+git clone https://github.com/your-username/health-challenge-tracker.git
+Install Dependencies
+Navigate into the project directory and install the required dependencies:
+
+cd health-challenge-tracker
+npm install
+Run the Project Locally
+To run the project locally, use the following command:
 ng serve
-```
+Once the application is compiled, open your browser and go to:
+http://localhost:4200
+Unit Tests
+Test Overview
+Unit tests have been written for:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+Component: add-workout.component.spec.ts
+Service: workout.service.ts
+Running Tests
+To run the unit tests, use the following command:
 ng test
-```
+This will launch the Karma test runner and execute all tests, showing the results in the terminal.
 
-## Running end-to-end tests
+Code coverage :
 
-For end-to-end (e2e) testing, run:
+Component: add-workout.component.spec.ts
+Service: workout.service.ts
+The unit tests ensure that all major functionalities in these parts of the application are correctly implemented. After running the tests using Jasmine and Karma, the overall code coverage is 100%, ensuring full test coverage for both the component and service.
 
-```bash
-ng e2e
-```
+Test Coverage Report:
+File	                            % Coverage
+add-workout.component.spec.ts	    100%
+workout.service.ts	                100%
+Test Results:
+Statements: 100%
+Branches: 100%
+Functions: 100%
+Lines: 100%
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Technologies Used
+Angular 14+: The framework for building the SPA.
+Tailwind CSS: A utility-first CSS framework for styling the application.
+localStorage: For persisting user data (workout details) on the client side.
+Karma and Jasmine: For running unit tests and ensuring 100% code coverage.
+Assumptions
+The project assumes that the user has at least basic knowledge of Angular and front-end web development practices.
+The data is stored locally in localStorage to persist it across page reloads.
+The project does not require a backend server; all data handling is done on the client side.
+Pagination is applied when there are more than 5 users.
+The charting feature.
 
-## Additional Resources
+Deployed Web App
+The live version of the app is hosted on Netlify and can be accessed here:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Live Web App
+
+GitHub Repository
+You can find the source code and the full project repository here:
+
+GitHub Repository
