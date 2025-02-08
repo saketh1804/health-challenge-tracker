@@ -1,12 +1,15 @@
-<div class="max-w-5xl mx-auto bg-white p-8 shadow-xl rounded-xl border border-green-400">
-  <h2 class="text-3xl font-bold text-green-800 text-center mb-6">📋 Workout List</h2>
+<div class="max-w-5xl mx-auto bg-white p-8 shadow-2xl rounded-2xl border border-green-500">
+  <h2 class="text-4xl font-extrabold text-green-800 text-center mb-6 flex items-center justify-center gap-2">
+    📋 <span>Workout List</span>
+  </h2>
 
-  <div class="flex gap-6 mb-6">
+  <!-- Filters -->
+  <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 justify-between">
     <input [(ngModel)]="searchText" placeholder="🔍 Search by Name" (ngModelChange)="filterByName()"
-      class="flex-1 p-4 border border-gray-300 rounded-lg focus:ring-4 focus:ring-green-500 transition" />
+      class="flex-1 p-4 border border-gray-300 rounded-lg focus:ring-4 focus:ring-green-600 transition shadow-sm bg-gray-50" />
 
     <select [(ngModel)]="selectedType" (change)="filterByType()"
-      class="p-4 border border-gray-300 rounded-lg focus:ring-4 focus:ring-green-500 transition bg-white">
+      class="p-4 border border-gray-300 rounded-lg focus:ring-4 focus:ring-green-600 transition bg-white shadow-sm">
       <option value="">Filter by Type</option>
       <option value="Running">🏃 Running</option>
       <option value="Cycling">🚴 Cycling</option>
@@ -15,31 +18,51 @@
     </select>
   </div>
 
-  <table class="w-full border-collapse border border-gray-300 shadow-md">
-    <thead>
-      <tr class="bg-green-700 text-white">
-        <th class="p-4">🏋️ Name</th>
-        <th class="p-4">🚴 Workout Type</th>
-        <th class="p-4">⏱️ Minutes</th>
-        <th class="p-4"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of filteredData" class="hover:bg-gray-100 transition">
-        <td class="p-4">{{ user.name }}</td>
-        <td class="p-4">{{ user.workout.type }}</td>
-        <td class="p-4">{{ user.workout.duration }}</td>
-        <td class="p-4">
-          <button (click)="deleteUser(user.name, user.workout.type)"
-            class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse border border-gray-300 shadow-lg rounded-lg">
+      <thead>
+        <tr class="bg-green-700 text-white text-lg">
+          <th class="p-4">🏋️ Name</th>
+          <th class="p-4">🚴 Workout Type</th>
+          <th class="p-4">⏱️ Minutes</th>
+          <th class="p-4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredData" class="even:bg-green-50 hover:bg-green-100 transition-all">
+          <td class="p-4 text-lg font-semibold">{{ user.name }}</td>
+          <td class="p-4">{{ user.workout.type }}</td>
+          <td class="p-4">{{ user.workout.duration }}</td>
+          <td class="p-4">
+            <button (click)="deleteUser(user.name, user.workout.type)"
+              class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105 transition-all">
+              🗑 Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
+  <!-- Pagination -->
   <div class="flex justify-center items-center gap-3 mt-6">
-    <button class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition" (click)="prevPage()" [disabled]="currentPage === 1">←</button>
+    <button class="px-4 py-2 rounded-lg font-semibold transition-all"
+      [class.bg-gray-300]="currentPage === 1"
+      [class.bg-gray-500]="currentPage > 1"
+      [class.text-white]="currentPage > 1"
+      (click)="prevPage()" [disabled]="currentPage === 1">
+      ← Prev
+    </button>
+    
     <span class="text-lg font-bold">Page {{ currentPage }} of {{ totalPages }}</span>
-    <button class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition" (click)="nextPage()" [disabled]="currentPage >= totalPages">→</button>
+    
+    <button class="px-4 py-2 rounded-lg font-semibold transition-all"
+      [class.bg-gray-300]="currentPage >= totalPages"
+      [class.bg-gray-500]="currentPage < totalPages"
+      [class.text-white]="currentPage < totalPages"
+      (click)="nextPage()" [disabled]="currentPage >= totalPages">
+      Next → 
+    </button>
   </div>
 </div>
