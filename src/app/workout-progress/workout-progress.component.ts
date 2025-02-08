@@ -13,15 +13,29 @@ import { NgFor } from '@angular/common';
   styleUrls: ['./workout-progress.component.css'],
 })
 export class WorkoutProgressComponent implements OnInit {
-  users: any[] = [];
+  users: string[] = [];
   selectedUser: string = '';
   allWorkoutData: any[] = [];
   workoutTypes = ['Running', 'Cycling', 'Yoga', 'Swimming'];
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: { color: '#333', font: { size: 16, weight: 'bold' } },
+      },
+    },
     scales: {
-      y: { beginAtZero: true },
+      x: {
+        grid: { display: false },
+        ticks: { font: { size: 14, weight: 'bold' } },
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+        ticks: { font: { size: 14 } },
+      },
     },
   };
 
@@ -33,8 +47,11 @@ export class WorkoutProgressComponent implements OnInit {
     datasets: [
       {
         data: [0, 0, 0, 0],
-        label: 'Workout Progress',
-        backgroundColor: '#42A5F5',
+        label: 'Workout Progress (mins)',
+        backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#9C27B0'],
+        hoverBackgroundColor: ['#45A049', '#FB8C00', '#1976D2', '#7B1FA2'],
+        borderRadius: 10,
+        barPercentage: 0.6,
       },
     ],
   };
@@ -52,12 +69,11 @@ export class WorkoutProgressComponent implements OnInit {
   }
 
   filterWorkouts(): void {
-    if (!this.selectedUser) {
-      this.updateChartData(this.allWorkoutData);
-    } else {
-      const filteredWorkouts = this.allWorkoutData.filter(workout => workout.name === this.selectedUser);
-      this.updateChartData(filteredWorkouts);
-    }
+    const filteredWorkouts = this.selectedUser
+      ? this.allWorkoutData.filter(workout => workout.name === this.selectedUser)
+      : this.allWorkoutData;
+
+    this.updateChartData(filteredWorkouts);
   }
 
   private updateChartData(data: any[]): void {
@@ -67,11 +83,13 @@ export class WorkoutProgressComponent implements OnInit {
       Yoga: 0,
       Swimming: 0,
     };
+
     data.forEach(({ workout }) => {
       if (workoutDurations.hasOwnProperty(workout.type)) {
         workoutDurations[workout.type] += workout.duration;
       }
     });
+
     this.barChartData = {
       ...this.barChartData,
       datasets: [
