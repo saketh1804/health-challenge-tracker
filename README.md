@@ -85,5 +85,4 @@ Live Web App
 
 GitHub Repository
 You can find the source code and the full project repository here:
-
-GitHub Repository
+https://github.com/saketh1804/health-challenge-tracker
