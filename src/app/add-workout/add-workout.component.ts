@@ -17,25 +17,28 @@ export class AddWorkoutComponent {
   constructor(private workoutService: WorkoutService, private ngZone: NgZone) {}
 
   addWorkout() {
-    if (this.workout.name && this.workout.type && this.workout.minutes) {
-      this.workoutService.addWorkout({
-        name: this.workout.name,
-        type: this.workout.type,
-        minutes: this.workout.minutes
-      });
-
-      this.message = `Workout added for ${this.workout.name}: ${this.workout.type} (${this.workout.minutes} mins)`;
-      this.success = true;
-
-      this.workout = { name: '', type: '', minutes: null };
-
-      this.ngZone.run(() => {
-        setTimeout(() => {
-          this.message = '';
-        }, 3000);
-      });
-    } else {
-      alert('Please fill in all fields');
+    if (!this.workout.name || !this.workout.type || !this.workout.minutes) {
+      alert('⚠️ Please fill in all fields!');
+      return;
     }
+
+    // Add Workout to Service
+    this.workoutService.addWorkout({
+      name: this.workout.name,
+      type: this.workout.type,
+      minutes: this.workout.minutes
+    });
+
+    // Show Success Message
+    this.message = `Workout added: ${this.workout.type} (${this.workout.minutes} mins)`;
+    this.success = true;
+
+    // Reset Form After 3 Seconds
+    this.ngZone.run(() => {
+      setTimeout(() => {
+        this.success = false;
+        this.workout = { name: '', type: '', minutes: null };
+      }, 3000);
+    });
   }
 }
