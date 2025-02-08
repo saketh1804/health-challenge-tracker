@@ -28,11 +28,7 @@ If you don't have them installed, you can download and install Node.js
 
 Cloning the Repository
 Clone the GitHub repository to your local machine:
-
-bash
-Copy
-Edit
-git clone https://github.com/your-username/health-challenge-tracker.git
+git clone https://github.com/saketh1804/health-challenge-tracker.git
 Install Dependencies
 Navigate into the project directory and install the required dependencies:
 
